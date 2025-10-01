@@ -1,17 +1,39 @@
 import { baseApi } from "../api";
+import { storeUserInfo } from "../slices/authSlice";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    userLogin: build.mutation({
+    // User Register
+    userRegister: build.mutation({
       query: (data) => ({
-        url: "/auth/login",
+        url: "/auth/register",
         method: "POST",
-        credentials: "include",
         body: data,
       }),
       invalidatesTags: ["auth"],
     }),
 
+    // user login
+    userLogin: build.mutation({
+      query: (data) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["auth"],
+
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          const response = result.data;
+          dispatch(storeUserInfo(response?.data?.token));
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    }),
+
+    // user forgot password
     forgotPassword: build.mutation({
       query: (data) => ({
         url: "/forget-password",

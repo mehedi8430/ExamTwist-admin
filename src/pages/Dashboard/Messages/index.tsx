@@ -2,11 +2,11 @@ import assets from "@/assets";
 import ArrowLeftIcon from "@/assets/svgs/arrow-left.svg?react";
 import SendIcon from "@/assets/svgs/Vector (2).svg?react";
 import CameraIcon from "@/assets/svgs/Frame 2087328222.svg?react";
-import { SearchForm } from "@/pages/Dashboard/components/DashboardHeader/SearchForm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import { SearchForm } from "@/components/SearchForm";
 
 // Types
 type TContact = {

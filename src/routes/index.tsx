@@ -2,28 +2,14 @@ import App from "@/App";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import AuthPage from "@/pages/Auth";
 import DashboardPage from "@/pages/Dashboard";
-import AllBookings from "@/pages/Dashboard/AllBookings";
-import BookingHistory from "@/pages/Dashboard/BookingHistory";
-import CalendarManagement from "@/pages/Dashboard/CalendarManagement";
-import ClientProfile from "@/pages/Dashboard/ClientProfile";
-import GetInvoice from "@/pages/Dashboard/GetInvoice";
-import Invoice from "@/pages/Dashboard/Invoice";
 import Messages from "@/pages/Dashboard/Messages";
 import Notifications from "@/pages/Dashboard/Notifications";
-import OverviewPage from "@/pages/Dashboard/Overview";
-import Bookings from "@/pages/Dashboard/Overview/pages/Bookings";
-import Payments from "@/pages/Dashboard/Overview/pages/Payments";
-import Revenue from "@/pages/Dashboard/Overview/pages/Revenue";
-import Reviews from "@/pages/Dashboard/Overview/pages/Reviews";
-import Stats from "@/pages/Dashboard/Overview/pages/Stats";
-import PaymentHistory from "@/pages/Dashboard/PaymentHistory";
 import ViewProfile from "@/pages/Dashboard/Profile";
 import EditProfile from "@/pages/Dashboard/Profile/EditProfile";
-import Reschedule from "@/pages/Dashboard/Reschedule";
-import AddServices from "@/pages/Dashboard/Services/AddServices";
-import ReleaseServices from "@/pages/Dashboard/Services/ReleaseServices";
 import TablesPage from "@/pages/Dashboard/Tables";
 import UnderWorking from "@/pages/Dashboard/UnderWorking";
+import AddUsersPage from "@/pages/Dashboard/Users/AddUsersPage";
+import UsersPage from "@/pages/Dashboard/Users/UsersPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import { createBrowserRouter, Navigate } from "react-router";
 
@@ -71,77 +57,25 @@ const router = createBrowserRouter([
         path: "/dashboard/messages",
         element: <Messages />,
       },
+      // users
       {
-        path: "/dashboard/booking-history",
-        element: <BookingHistory />,
-      },
-      {
-        path: "/dashboard/home/overview",
-        element: <OverviewPage />,
+        path: "/dashboard/users",
         children: [
           {
             index: true,
-            element: (
-              <Navigate to="/dashboard/home/overview/bookings" replace />
-            ),
-          },
-          { path: "/dashboard/home/overview/bookings", element: <Bookings /> },
-          { path: "/dashboard/home/overview/Revenue", element: <Revenue /> },
-          { path: "/dashboard/home/overview/reviews", element: <Reviews /> },
-          { path: "/dashboard/home/overview/stats", element: <Stats /> },
-          { path: "/dashboard/home/overview/payments", element: <Payments /> },
-        ],
-      },
-      {
-        path: "/dashboard/calendar-management",
-        element: <CalendarManagement />,
-      },
-      {
-        path: "/dashboard/bookings",
-        children: [
-          {
-            index: true,
-            element: <AllBookings />,
+            element: <Navigate to="/dashboard/users/all" replace />,
           },
           {
-            path: "/dashboard/bookings/reschedule",
-            element: <Reschedule />,
+            path: "/dashboard/users/all",
+            element: <UsersPage />,
           },
           {
-            path: "/dashboard/bookings/client-profile",
-            element: <ClientProfile />,
-          },
-          {
-            path: "/dashboard/bookings/invoice-create",
-            element: <Invoice />,
-          },
-          {
-            path: "/dashboard/bookings/get-invoice",
-            element: <GetInvoice />,
+            path: "/dashboard/users/add",
+            element: <AddUsersPage />,
           },
         ],
       },
-      {
-        path: "/dashboard/services",
-        children: [
-          {
-            index: true,
-            element: <Navigate to="/dashboard/services/release" replace />,
-          },
-          {
-            path: "/dashboard/services/release",
-            element: <ReleaseServices />,
-          },
-          {
-            path: "/dashboard/services/add",
-            element: <AddServices />,
-          },
-        ],
-      },
-      {
-        path: "/dashboard/payment",
-        element: <PaymentHistory />,
-      },
+      // Profile
       {
         path: "/dashboard/profile",
         children: [

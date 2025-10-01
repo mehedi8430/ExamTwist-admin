@@ -14,9 +14,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useNavigate } from "react-router";
+import { useUserLoginMutation } from "@/redux/endpoints/authApi";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -41,15 +42,24 @@ export default function LoginForm() {
     },
   });
 
+  const [userLogin, { isSuccess, isLoading }] = useUserLoginMutation();
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast.success(
-      `Logged in successfully!\n\nEmail: ${values.email}\nRemember me: ${
-        values.rememberMe ? "Yes" : "No"
-      }`,
-    );
-    navigate("/dashboard");
-    form.reset();
+    const payload = {
+      email: values.email,
+      password: values.password,
+    };
+
+    try {
+      userLogin(payload).unwrap();
+
+      if (isSuccess) {
+        toast.success("Login successful!");
+        navigate("/dashboard/home");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -135,8 +145,15 @@ export default function LoginForm() {
             </Button>
           </div>
 
-          <Button type="submit" className="w-full">
-            Login
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <span>Loading...</span>
+              </>
+            ) : (
+              "Login"
+            )}
           </Button>
         </form>
       </Form>

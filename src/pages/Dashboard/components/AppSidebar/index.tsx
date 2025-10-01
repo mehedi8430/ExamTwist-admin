@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import {
   Sidebar,
@@ -8,10 +7,6 @@ import {
 } from "@/components/ui/sidebar";
 import assets from "@/assets";
 import DashboardIcon from "@/assets/svgs/home.svg?react";
-import CalculatorIcon from "@/assets/svgs/calendar-plus.svg?react";
-import BookingIcon from "@/assets/svgs/booking.svg?react";
-import DueListIcon from "@/assets/svgs/due-list.svg?react";
-import ServicesIcon from "@/assets/svgs/Services.svg?react";
 // import EyeFourIcon from "@/assets/svgs/eye.svg?react";
 import PressReleaseIcon from "@/assets/svgs/press-release.svg?react";
 import AddIcon from "@/assets/svgs/fi-rr-add.svg?react";
@@ -21,6 +16,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import NavMain from "./NavMain";
 import CollapsibleNav from "./CollapsibleNav";
 import useTheme from "@/theme";
+import { UsersIcon } from "lucide-react";
 
 export type TNavMenu = {
   title: string;
@@ -49,52 +45,29 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       end: false,
     },
     {
-      title: "Calendar",
-      url: "/dashboard/calendar-management",
-      icon: <CalculatorIcon />,
-      end: true,
-    },
-    {
-      title: "Booking",
-      url: "/dashboard/bookings",
-      icon: <BookingIcon />,
-      end: false,
-    },
-    {
-      title: "Due List",
-      url: "/dashboard/payment",
-      icon: <DueListIcon />,
-      end: true,
-    },
-    {
-      title: "Services",
-      url: "/dashboard/services",
-      icon: <ServicesIcon />,
+      title: "Users",
+      url: "/dashboard/users",
+      icon: <UsersIcon />,
       end: false,
       subItems: [
         {
-          title: "All Service",
-          url: "/dashboard/services/release",
+          title: "All Users",
+          url: "/dashboard/users/all",
           icon: <PressReleaseIcon />,
           end: true,
         },
         {
-          title: "Add Service",
-          url: "/dashboard/services/add",
+          title: "Add User",
+          url: "/dashboard/users/add",
           icon: <AddIcon />,
           end: true,
         },
       ],
     },
-    {
-      title: "All Table Demos",
-      url: "/dashboard/tables",
-      icon: <DueListIcon />,
-      end: true,
-    },
   ];
 
   // Helper function to check if any sub-item is active
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isSubItemActive = (subItems: any[]) => {
     return subItems.some((subItem) => {
       if (subItem.end) {
@@ -105,6 +78,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   };
 
   // Helper function to check if main item is active (excluding parent items with sub-items)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isItemActive = (item: any) => {
     // For items with sub-items, only check direct URL match, not sub-items
     if (item.subItems) {
