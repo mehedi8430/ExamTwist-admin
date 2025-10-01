@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useNavigate } from "react-router";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -28,13 +29,14 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "admin@example.com",
+      password: "admin123",
       rememberMe: false,
     },
   });
@@ -46,6 +48,7 @@ export default function LoginForm() {
         values.rememberMe ? "Yes" : "No"
       }`,
     );
+    navigate("/dashboard");
     form.reset();
   }
 
@@ -65,7 +68,7 @@ export default function LoginForm() {
                   <Input
                     type="email"
                     placeholder="Email"
-                    className="bg-muted"
+                    className="bg-muted mt-2"
                     {...field}
                   />
                 </FormControl>
@@ -110,27 +113,37 @@ export default function LoginForm() {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="rememberMe"
-            render={({ field }) => (
-              <FormItem className="flex items-center gap-2">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <FormLabel className="text-sm">Remember me</FormLabel>
-              </FormItem>
-            )}
-          />
+          <div className="flex items-center justify-between">
+            <FormField
+              control={form.control}
+              name="rememberMe"
+              render={({ field }) => (
+                <FormItem className="flex items-center gap-2">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormLabel className="text-sm">Remember me</FormLabel>
+                </FormItem>
+              )}
+            />
+
+            <Button type="button" variant="link">
+              Forgot password?
+            </Button>
+          </div>
 
           <Button type="submit" className="w-full">
             Login
           </Button>
         </form>
       </Form>
+
+      <p className="text-center mt-2 text-xs">
+        By signing up, you agree to our Terms & Privacy Policy.
+      </p>
     </section>
   );
 }
