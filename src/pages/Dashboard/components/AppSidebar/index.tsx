@@ -18,17 +18,19 @@ import CollapsibleNav from "./CollapsibleNav";
 import useTheme from "@/theme";
 import { UsersIcon } from "lucide-react";
 
+export type TSubItem = {
+  title: string;
+  url: string;
+  icon: React.ReactNode;
+  end: boolean;
+};
+
 export type TNavMenu = {
   title: string;
   url: string;
   icon: React.ReactNode;
   end: boolean;
-  subItems?: {
-    title: string;
-    url: string;
-    icon: React.ReactNode;
-    end: boolean;
-  }[];
+  subItems?: TSubItem[];
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -44,6 +46,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       icon: <DashboardIcon />,
       end: false,
     },
+    // users
     {
       title: "Users",
       url: "/dashboard/users",
@@ -64,11 +67,45 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         },
       ],
     },
+    // students
+    {
+      title: "Students",
+      url: "/dashboard/students",
+      icon: <UsersIcon />,
+      end: false,
+      subItems: [
+        {
+          title: "All Students",
+          url: "/dashboard/students/all",
+          icon: <PressReleaseIcon />,
+          end: true,
+        },
+        {
+          title: "Add Students",
+          url: "/dashboard/students/add",
+          icon: <AddIcon />,
+          end: true,
+        },
+      ],
+    },
+    // payments and subscriptions
+    {
+      title: "Subscriptions Management",
+      url: "/dashboard/subscriptions/all",
+      icon: <PressReleaseIcon />,
+      end: true,
+    },
+    // Categories
+    {
+      title: "Categories",
+      url: "/dashboard/categories/all",
+      icon: <PressReleaseIcon />,
+      end: true,
+    },
   ];
 
   // Helper function to check if any sub-item is active
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const isSubItemActive = (subItems: any[]) => {
+  const isSubItemActive = (subItems: TSubItem[]) => {
     return subItems.some((subItem) => {
       if (subItem.end) {
         return location.pathname === subItem.url;
@@ -78,8 +115,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   };
 
   // Helper function to check if main item is active (excluding parent items with sub-items)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const isItemActive = (item: any) => {
+  const isItemActive = (item: TNavMenu) => {
     // For items with sub-items, only check direct URL match, not sub-items
     if (item.subItems) {
       if (item.end) {

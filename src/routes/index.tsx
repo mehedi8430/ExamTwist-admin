@@ -75,6 +75,52 @@ const router = createBrowserRouter([
           },
         ],
       },
+      // students
+      {
+        path: "/dashboard/students",
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard/students/all" replace />,
+          },
+          {
+            path: "/dashboard/students/all",
+            element: <UnderWorking />,
+          },
+          {
+            path: "/dashboard/students/add",
+            element: <UnderWorking />,
+          },
+        ],
+      },
+      // subscriptions management
+      {
+        path: "/dashboard/subscriptions",
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard/subscriptions/all" replace />,
+          },
+          {
+            path: "/dashboard/subscriptions/all",
+            element: <UnderWorking />,
+          },
+        ],
+      },
+      // Categories
+      {
+        path: "/dashboard/categories",
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard/categories/all" replace />,
+          },
+          {
+            path: "/dashboard/categories/all",
+            element: <UnderWorking />,
+          },
+        ],
+      },
       // Profile
       {
         path: "/dashboard/profile",

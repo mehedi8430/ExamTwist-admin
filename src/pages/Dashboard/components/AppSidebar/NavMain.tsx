@@ -26,12 +26,12 @@ export default function NavMain({
             tooltip={item.title}
             className={cn(
               "w-full text-foreground hover:text-primary",
-              isActive ? "text-primary" : "text-foreground"
+              isActive ? "text-primary" : "text-foreground",
             )}
           >
             <span
               className={cn(
-                "size-8 group-hover/item:border-primary/50 rounded-full text-xl flex items-center justify-center"
+                "size-8 group-hover/item:border-primary/50 rounded-full text-xl flex items-center justify-center",
               )}
             >
               {item.icon}
@@ -42,12 +42,14 @@ export default function NavMain({
               }
             >
               <h4 className={cn("text-nowrap duration-300 text-base")}>
-                {item.title}
+                <span className="block max-w-[10rem] truncate">
+                  {item.title}
+                </span>
               </h4>
               <div
                 className={cn(
                   "w-full h-[2px] bg-primary origin-left duration-500 scale-0 group-hover/item:scale-100",
-                  isActive ? "scale-100" : ""
+                  isActive ? "scale-100" : "",
                 )}
               />
             </div>
