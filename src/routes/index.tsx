@@ -2,28 +2,15 @@ import App from "@/App";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import AuthPage from "@/pages/Auth";
 import DashboardPage from "@/pages/Dashboard";
-import AllBookings from "@/pages/Dashboard/AllBookings";
-import BookingHistory from "@/pages/Dashboard/BookingHistory";
-import CalendarManagement from "@/pages/Dashboard/CalendarManagement";
-import ClientProfile from "@/pages/Dashboard/ClientProfile";
-import GetInvoice from "@/pages/Dashboard/GetInvoice";
-import Invoice from "@/pages/Dashboard/Invoice";
+import CategoriesPage from "@/pages/Dashboard/Categories";
 import Messages from "@/pages/Dashboard/Messages";
 import Notifications from "@/pages/Dashboard/Notifications";
-import OverviewPage from "@/pages/Dashboard/Overview";
-import Bookings from "@/pages/Dashboard/Overview/pages/Bookings";
-import Payments from "@/pages/Dashboard/Overview/pages/Payments";
-import Revenue from "@/pages/Dashboard/Overview/pages/Revenue";
-import Reviews from "@/pages/Dashboard/Overview/pages/Reviews";
-import Stats from "@/pages/Dashboard/Overview/pages/Stats";
-import PaymentHistory from "@/pages/Dashboard/PaymentHistory";
 import ViewProfile from "@/pages/Dashboard/Profile";
 import EditProfile from "@/pages/Dashboard/Profile/EditProfile";
-import Reschedule from "@/pages/Dashboard/Reschedule";
-import AddServices from "@/pages/Dashboard/Services/AddServices";
-import ReleaseServices from "@/pages/Dashboard/Services/ReleaseServices";
 import TablesPage from "@/pages/Dashboard/Tables";
 import UnderWorking from "@/pages/Dashboard/UnderWorking";
+import AddUsersPage from "@/pages/Dashboard/Users/AddUsersPage";
+import UsersPage from "@/pages/Dashboard/Users/UsersPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import { createBrowserRouter, Navigate } from "react-router";
 
@@ -71,77 +58,130 @@ const router = createBrowserRouter([
         path: "/dashboard/messages",
         element: <Messages />,
       },
+      // users
       {
-        path: "/dashboard/booking-history",
-        element: <BookingHistory />,
-      },
-      {
-        path: "/dashboard/home/overview",
-        element: <OverviewPage />,
+        path: "/dashboard/users",
         children: [
           {
             index: true,
-            element: (
-              <Navigate to="/dashboard/home/overview/bookings" replace />
-            ),
+            element: <Navigate to="/dashboard/users/all" replace />,
           },
-          { path: "/dashboard/home/overview/bookings", element: <Bookings /> },
-          { path: "/dashboard/home/overview/Revenue", element: <Revenue /> },
-          { path: "/dashboard/home/overview/reviews", element: <Reviews /> },
-          { path: "/dashboard/home/overview/stats", element: <Stats /> },
-          { path: "/dashboard/home/overview/payments", element: <Payments /> },
+          {
+            path: "/dashboard/users/all",
+            element: <UsersPage />,
+          },
+          {
+            path: "/dashboard/users/add",
+            element: <AddUsersPage />,
+          },
         ],
       },
+      // students
       {
-        path: "/dashboard/calendar-management",
-        element: <CalendarManagement />,
-      },
-      {
-        path: "/dashboard/bookings",
+        path: "/dashboard/students",
         children: [
           {
             index: true,
-            element: <AllBookings />,
+            element: <Navigate to="/dashboard/students/all" replace />,
           },
           {
-            path: "/dashboard/bookings/reschedule",
-            element: <Reschedule />,
+            path: "/dashboard/students/all",
+            element: <UnderWorking />,
           },
           {
-            path: "/dashboard/bookings/client-profile",
-            element: <ClientProfile />,
-          },
-          {
-            path: "/dashboard/bookings/invoice-create",
-            element: <Invoice />,
-          },
-          {
-            path: "/dashboard/bookings/get-invoice",
-            element: <GetInvoice />,
+            path: "/dashboard/students/add",
+            element: <UnderWorking />,
           },
         ],
       },
+      // subscriptions management
       {
-        path: "/dashboard/services",
+        path: "/dashboard/subscriptions",
         children: [
           {
             index: true,
-            element: <Navigate to="/dashboard/services/release" replace />,
+            element: <Navigate to="/dashboard/subscriptions/all" replace />,
           },
           {
-            path: "/dashboard/services/release",
-            element: <ReleaseServices />,
-          },
-          {
-            path: "/dashboard/services/add",
-            element: <AddServices />,
+            path: "/dashboard/subscriptions/all",
+            element: <UnderWorking />,
           },
         ],
       },
+      // Categories
       {
-        path: "/dashboard/payment",
-        element: <PaymentHistory />,
+        path: "/dashboard/categories",
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard/categories/all" replace />,
+          },
+          {
+            path: "/dashboard/categories/all",
+            element: <CategoriesPage />,
+          },
+        ],
       },
+      // question management
+      {
+        path: "/dashboard/questions",
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard/questions/all" replace />,
+          },
+          {
+            path: "/dashboard/questions/all",
+            element: <UnderWorking />,
+          },
+          {
+            path: "/dashboard/questions/add",
+            element: <UnderWorking />,
+          },
+        ],
+      },
+      // model-tests management
+      {
+        path: "/dashboard/model-tests",
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard/model-tests/all" replace />,
+          },
+          {
+            path: "/dashboard/model-tests/all",
+            element: <UnderWorking />,
+          },
+          {
+            path: "/dashboard/model-tests/add",
+            element: <UnderWorking />,
+          },
+        ],
+      },
+      // Packages Management
+      {
+        path: "/dashboard/packages",
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard/packages/all" replace />,
+          },
+          {
+            path: "/dashboard/packages/all",
+            element: <UnderWorking />,
+          },
+          {
+            path: "/dashboard/packages/add",
+            element: <UnderWorking />,
+          },
+        ],
+      },
+      // Quota Subscription
+      {
+        path: "/dashboard/quota-subscription",
+        element: <UnderWorking />,
+      },
+      // Profile
       {
         path: "/dashboard/profile",
         children: [

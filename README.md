@@ -1,5 +1,7 @@
 # React TypeScript Vite Boilerplate
 
+![all categories](image.png)
+
 A professional, production-ready boilerplate for building modern React applications with TypeScript and Vite. This template provides an optimized development environment with hot module replacement, strict TypeScript checking, and best practices for code organization.
 
 ## Table of Contents

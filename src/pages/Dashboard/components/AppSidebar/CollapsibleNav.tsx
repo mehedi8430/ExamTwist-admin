@@ -35,12 +35,12 @@ export default function CollapsibleNav({
             className={cn(
               "w-full text-foreground hover:text-primary group/item",
               isActive ? "text-primary" : "text-foreground",
-              "group-[data-state=open]/collapsible:hover:bg-transparent"
+              "group-[data-state=open]/collapsible:hover:bg-transparent",
             )}
           >
             <span
               className={cn(
-                "size-8 group-hover/item:border-primary/50 rounded-full text-xl flex items-center justify-center"
+                "size-8 group-hover/item:border-primary/50 rounded-full text-xl flex items-center justify-center",
               )}
             >
               {item.icon}
@@ -50,13 +50,15 @@ export default function CollapsibleNav({
                 state === "collapsed" && !isMobile ? "hidden" : "w-full block"
               }
             >
-              <h4 className={cn("text-nowrap duration-300 text-base")}>
-                {item.title}
+              <h4 className={cn("text-nowrap duration-300 text-base ")}>
+                <span className="truncate max-w-[9rem] block">
+                  {item.title}
+                </span>
               </h4>
               <div
                 className={cn(
                   "w-full h-[2px] bg-primary origin-left duration-500 scale-0 group-hover/item:scale-100",
-                  isActive ? "scale-100" : ""
+                  isActive ? "scale-100" : "",
                 )}
               />
             </div>
@@ -79,7 +81,7 @@ export default function CollapsibleNav({
                         "hover:text-primary",
                         isActive
                           ? "text-primary"
-                          : "text-[#797979] hover:text-primary"
+                          : "text-[#797979] hover:text-primary",
                       )
                     }
                   >
@@ -88,7 +90,7 @@ export default function CollapsibleNav({
                         <span
                           className={cn(
                             "size-6 rounded-full text-sm flex items-center justify-center",
-                            isActive ? "text-primary" : ""
+                            isActive ? "text-primary" : "",
                           )}
                         >
                           {subItem.icon}
@@ -96,7 +98,7 @@ export default function CollapsibleNav({
                         <span
                           className={cn(
                             "duration-300",
-                            isActive ? "text-primary" : "text-inherit"
+                            isActive ? "text-primary" : "text-inherit",
                           )}
                         >
                           {subItem.title}

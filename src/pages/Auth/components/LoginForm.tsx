@@ -14,8 +14,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useNavigate } from "react-router";
+import { useUserLoginMutation } from "@/redux/endpoints/authApi";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -28,25 +30,36 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "admin@example.com",
+      password: "admin123",
       rememberMe: false,
     },
   });
 
+  const [userLogin, { isSuccess, isLoading }] = useUserLoginMutation();
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast.success(
-      `Logged in successfully!\n\nEmail: ${values.email}\nRemember me: ${
-        values.rememberMe ? "Yes" : "No"
-      }`,
-    );
-    form.reset();
+    const payload = {
+      email: values.email,
+      password: values.password,
+    };
+
+    try {
+      userLogin(payload).unwrap();
+
+      if (isSuccess) {
+        toast.success("Login successful!");
+        navigate("/dashboard/home");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -65,7 +78,7 @@ export default function LoginForm() {
                   <Input
                     type="email"
                     placeholder="Email"
-                    className="bg-muted"
+                    className="bg-muted mt-2"
                     {...field}
                   />
                 </FormControl>
@@ -110,27 +123,44 @@ export default function LoginForm() {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="rememberMe"
-            render={({ field }) => (
-              <FormItem className="flex items-center gap-2">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <FormLabel className="text-sm">Remember me</FormLabel>
-              </FormItem>
-            )}
-          />
+          <div className="flex items-center justify-between">
+            <FormField
+              control={form.control}
+              name="rememberMe"
+              render={({ field }) => (
+                <FormItem className="flex items-center gap-2">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormLabel className="text-sm">Remember me</FormLabel>
+                </FormItem>
+              )}
+            />
 
-          <Button type="submit" className="w-full">
-            Login
+            <Button type="button" variant="link">
+              Forgot password?
+            </Button>
+          </div>
+
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <span>Loading...</span>
+              </>
+            ) : (
+              "Login"
+            )}
           </Button>
         </form>
       </Form>
+
+      <p className="text-center mt-2 text-xs">
+        By signing up, you agree to our Terms & Privacy Policy.
+      </p>
     </section>
   );
 }

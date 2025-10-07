@@ -8,7 +8,7 @@ import DialogWrapper from "@/components/DialogContents";
 import DeleteService from "./dialogs/DeleteService";
 import { DataTable } from "@/components/DataTable/DataTable";
 
-export default function ReleaseServices() {
+export default function UsersPage() {
   type TServiceData = {
     id: number;
     logo: string;

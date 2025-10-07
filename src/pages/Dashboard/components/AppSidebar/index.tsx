@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import {
   Sidebar,
@@ -7,32 +6,44 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import assets from "@/assets";
-import DashboardIcon from "@/assets/svgs/home.svg?react";
-import CalculatorIcon from "@/assets/svgs/calendar-plus.svg?react";
-import BookingIcon from "@/assets/svgs/booking.svg?react";
-import DueListIcon from "@/assets/svgs/due-list.svg?react";
-import ServicesIcon from "@/assets/svgs/Services.svg?react";
+// import DashboardIcon from "@/assets/svgs/home.svg?react";
 // import EyeFourIcon from "@/assets/svgs/eye.svg?react";
-import PressReleaseIcon from "@/assets/svgs/press-release.svg?react";
-import AddIcon from "@/assets/svgs/fi-rr-add.svg?react";
+// import PressReleaseIcon from "@/assets/svgs/press-release.svg?react";
+// import AddIcon from "@/assets/svgs/fi-rr-add.svg?react";
 import { useLocation } from "react-router";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import NavMain from "./NavMain";
 import CollapsibleNav from "./CollapsibleNav";
 import useTheme from "@/theme";
+import {
+  ClipboardList,
+  CreditCard,
+  FileQuestion,
+  FolderTree,
+  Gauge,
+  GraduationCap,
+  LayoutDashboard,
+  Package,
+  UserPlus,
+  UserRoundPlus,
+  Users,
+  UsersRound,
+} from "lucide-react";
+
+export type TSubItem = {
+  title: string;
+  url: string;
+  icon: React.ReactNode;
+  end: boolean;
+};
 
 export type TNavMenu = {
   title: string;
   url: string;
   icon: React.ReactNode;
   end: boolean;
-  subItems?: {
-    title: string;
-    url: string;
-    icon: React.ReactNode;
-    end: boolean;
-  }[];
+  subItems?: TSubItem[];
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -45,57 +56,97 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     {
       title: "Dashboard",
       url: "/dashboard/home",
-      icon: <DashboardIcon />,
+      icon: <LayoutDashboard className="w-5 h-5" />,
       end: false,
     },
+    // users
     {
-      title: "Calendar",
-      url: "/dashboard/calendar-management",
-      icon: <CalculatorIcon />,
-      end: true,
-    },
-    {
-      title: "Booking",
-      url: "/dashboard/bookings",
-      icon: <BookingIcon />,
-      end: false,
-    },
-    {
-      title: "Due List",
-      url: "/dashboard/payment",
-      icon: <DueListIcon />,
-      end: true,
-    },
-    {
-      title: "Services",
-      url: "/dashboard/services",
-      icon: <ServicesIcon />,
+      title: "Users",
+      url: "/dashboard/users",
+      icon: <Users className="w-5 h-5" />,
       end: false,
       subItems: [
         {
-          title: "All Service",
-          url: "/dashboard/services/release",
-          icon: <PressReleaseIcon />,
+          title: "All Users",
+          url: "/dashboard/users/all",
+          icon: <UsersRound className="w-4 h-4" />,
           end: true,
         },
         {
-          title: "Add Service",
-          url: "/dashboard/services/add",
-          icon: <AddIcon />,
+          title: "Add User",
+          url: "/dashboard/users/add",
+          icon: <UserPlus className="w-4 h-4" />,
           end: true,
         },
       ],
     },
+    // students
     {
-      title: "All Table Demos",
-      url: "/dashboard/tables",
-      icon: <DueListIcon />,
+      title: "Students",
+      url: "/dashboard/students",
+      icon: <GraduationCap className="w-5 h-5" />,
+      end: false,
+      subItems: [
+        {
+          title: "All Students",
+          url: "/dashboard/students/all",
+          icon: <UsersRound className="w-4 h-4" />,
+          end: true,
+        },
+        {
+          title: "Add Students",
+          url: "/dashboard/students/add",
+          icon: <UserRoundPlus className="w-4 h-4" />,
+          end: true,
+        },
+      ],
+    },
+    // payments and subscriptions
+    {
+      title: "Subscriptions Management",
+      url: "/dashboard/subscriptions/all",
+      icon: <CreditCard className="w-5 h-5" />,
+      end: true,
+    },
+    // Categories
+    {
+      title: "Categories",
+      url: "/dashboard/categories/all",
+      icon: <FolderTree className="w-5 h-5" />,
+      end: true,
+    },
+    // Questions
+    {
+      title: "Questions",
+      url: "/dashboard/questions/all",
+      icon: <FileQuestion className="w-5 h-5" />,
+      end: true,
+    },
+    // Model tests
+    {
+      title: "Model Tests",
+      url: "/dashboard/model-tests/all",
+      icon: <ClipboardList className="w-5 h-5" />,
+      end: true,
+    },
+    // Packages
+    {
+      title: "Packages",
+      url: "/dashboard/packages/all",
+      icon: <Package className="w-5 h-5" />,
+      end: true,
+    },
+    // Quota Subscription
+    {
+      title: "Quota Subscription",
+      url: "/dashboard/quota-subscription",
+      icon: <Gauge className="w-5 h-5" />,
       end: true,
     },
   ];
 
   // Helper function to check if any sub-item is active
-  const isSubItemActive = (subItems: any[]) => {
+  const isSubItemActive = (subItems: TSubItem[]) => {
     return subItems.some((subItem) => {
       if (subItem.end) {
         return location.pathname === subItem.url;
@@ -105,7 +156,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   };
 
   // Helper function to check if main item is active (excluding parent items with sub-items)
-  const isItemActive = (item: any) => {
+  const isItemActive = (item: TNavMenu) => {
     // For items with sub-items, only check direct URL match, not sub-items
     if (item.subItems) {
       if (item.end) {

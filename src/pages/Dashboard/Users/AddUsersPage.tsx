@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 
-export default function AddServices() {
+export default function AddUsersPage() {
   return (
     <section>
       <h3 className="text-2xl font-semibold mb-10">Service Page</h3>
