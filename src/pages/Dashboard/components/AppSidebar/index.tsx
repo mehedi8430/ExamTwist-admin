@@ -6,17 +6,30 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import assets from "@/assets";
-import DashboardIcon from "@/assets/svgs/home.svg?react";
+// import DashboardIcon from "@/assets/svgs/home.svg?react";
 // import EyeFourIcon from "@/assets/svgs/eye.svg?react";
-import PressReleaseIcon from "@/assets/svgs/press-release.svg?react";
-import AddIcon from "@/assets/svgs/fi-rr-add.svg?react";
+// import PressReleaseIcon from "@/assets/svgs/press-release.svg?react";
+// import AddIcon from "@/assets/svgs/fi-rr-add.svg?react";
 import { useLocation } from "react-router";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import NavMain from "./NavMain";
 import CollapsibleNav from "./CollapsibleNav";
 import useTheme from "@/theme";
-import { UsersIcon } from "lucide-react";
+import {
+  ClipboardList,
+  CreditCard,
+  FileQuestion,
+  FolderTree,
+  Gauge,
+  GraduationCap,
+  LayoutDashboard,
+  Package,
+  UserPlus,
+  UserRoundPlus,
+  Users,
+  UsersRound,
+} from "lucide-react";
 
 export type TSubItem = {
   title: string;
@@ -43,26 +56,26 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     {
       title: "Dashboard",
       url: "/dashboard/home",
-      icon: <DashboardIcon />,
+      icon: <LayoutDashboard className="w-5 h-5" />,
       end: false,
     },
     // users
     {
       title: "Users",
       url: "/dashboard/users",
-      icon: <UsersIcon />,
+      icon: <Users className="w-5 h-5" />,
       end: false,
       subItems: [
         {
           title: "All Users",
           url: "/dashboard/users/all",
-          icon: <PressReleaseIcon />,
+          icon: <UsersRound className="w-4 h-4" />,
           end: true,
         },
         {
           title: "Add User",
           url: "/dashboard/users/add",
-          icon: <AddIcon />,
+          icon: <UserPlus className="w-4 h-4" />,
           end: true,
         },
       ],
@@ -71,19 +84,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     {
       title: "Students",
       url: "/dashboard/students",
-      icon: <UsersIcon />,
+      icon: <GraduationCap className="w-5 h-5" />,
       end: false,
       subItems: [
         {
           title: "All Students",
           url: "/dashboard/students/all",
-          icon: <PressReleaseIcon />,
+          icon: <UsersRound className="w-4 h-4" />,
           end: true,
         },
         {
           title: "Add Students",
           url: "/dashboard/students/add",
-          icon: <AddIcon />,
+          icon: <UserRoundPlus className="w-4 h-4" />,
           end: true,
         },
       ],
@@ -92,42 +105,42 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     {
       title: "Subscriptions Management",
       url: "/dashboard/subscriptions/all",
-      icon: <PressReleaseIcon />,
+      icon: <CreditCard className="w-5 h-5" />,
       end: true,
     },
     // Categories
     {
       title: "Categories",
       url: "/dashboard/categories/all",
-      icon: <PressReleaseIcon />,
+      icon: <FolderTree className="w-5 h-5" />,
       end: true,
     },
     // Questions
     {
       title: "Questions",
       url: "/dashboard/questions/all",
-      icon: <PressReleaseIcon />,
+      icon: <FileQuestion className="w-5 h-5" />,
       end: true,
     },
     // Model tests
     {
       title: "Model Tests",
       url: "/dashboard/model-tests/all",
-      icon: <PressReleaseIcon />,
+      icon: <ClipboardList className="w-5 h-5" />,
       end: true,
     },
     // Packages
     {
       title: "Packages",
       url: "/dashboard/packages/all",
-      icon: <PressReleaseIcon />,
+      icon: <Package className="w-5 h-5" />,
       end: true,
     },
     // Quota Subscription
     {
       title: "Quota Subscription",
       url: "/dashboard/quota-subscription",
-      icon: <PressReleaseIcon />,
+      icon: <Gauge className="w-5 h-5" />,
       end: true,
     },
   ];

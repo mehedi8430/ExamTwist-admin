@@ -120,7 +120,7 @@ export default function CategoriesPage() {
   const IconComponent = selectedCategory.icon;
 
   return (
-    <div className="min-h-screen">
+    <section className="">
       <div className="">
         {/* Header */}
         <div className="mb-8">
@@ -132,7 +132,7 @@ export default function CategoriesPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Sidebar - Category List */}
-          <div className="lg:col-span-1  rounded-xl p-4 border border-border">
+          <div className="lg:col-span-1  rounded-xl p-4 border-2 border-border">
             <div className="max-h-[64vh] overflow-y-auto">
               <h2 className="text-lg font-semibold mb-4 px-2">Categories</h2>
               <div className="space-y-1">
@@ -164,7 +164,7 @@ export default function CategoriesPage() {
 
           {/* Main Content Area */}
           <div className="lg:col-span-3">
-            <div className="rounded-xl border border-border">
+            <div className="rounded-xl border-2 border-border">
               {/* Category Header */}
               <div className={`p-6`}>
                 <div className="flex items-center justify-between">
@@ -324,6 +324,6 @@ export default function CategoriesPage() {
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 }
