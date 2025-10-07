@@ -42,23 +42,23 @@ export default function LoginForm() {
     },
   });
 
-  const [userLogin, { isSuccess, isLoading }] = useUserLoginMutation();
+  const [userLogin, { isLoading }] = useUserLoginMutation();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     const payload = {
       email: values.email,
       password: values.password,
     };
 
     try {
-      userLogin(payload).unwrap();
+      await userLogin(payload).unwrap();
 
-      if (isSuccess) {
-        toast.success("Login successful!");
-        navigate("/dashboard/home");
-      }
-    } catch (error) {
+      toast.success("Login successful!");
+      navigate("/dashboard/home");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       console.log(error);
+      toast.error(error.data.message || "Login failed. Please try again.");
     }
   }
 
