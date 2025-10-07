@@ -2,6 +2,7 @@ import App from "@/App";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import AuthPage from "@/pages/Auth";
 import DashboardPage from "@/pages/Dashboard";
+import CategoriesPage from "@/pages/Dashboard/Categories";
 import Messages from "@/pages/Dashboard/Messages";
 import Notifications from "@/pages/Dashboard/Notifications";
 import ViewProfile from "@/pages/Dashboard/Profile";
@@ -117,9 +118,68 @@ const router = createBrowserRouter([
           },
           {
             path: "/dashboard/categories/all",
+            element: <CategoriesPage />,
+          },
+        ],
+      },
+      // question management
+      {
+        path: "/dashboard/questions",
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard/questions/all" replace />,
+          },
+          {
+            path: "/dashboard/questions/all",
+            element: <UnderWorking />,
+          },
+          {
+            path: "/dashboard/questions/add",
             element: <UnderWorking />,
           },
         ],
+      },
+      // model-tests management
+      {
+        path: "/dashboard/model-tests",
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard/model-tests/all" replace />,
+          },
+          {
+            path: "/dashboard/model-tests/all",
+            element: <UnderWorking />,
+          },
+          {
+            path: "/dashboard/model-tests/add",
+            element: <UnderWorking />,
+          },
+        ],
+      },
+      // Packages Management
+      {
+        path: "/dashboard/packages",
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard/packages/all" replace />,
+          },
+          {
+            path: "/dashboard/packages/all",
+            element: <UnderWorking />,
+          },
+          {
+            path: "/dashboard/packages/add",
+            element: <UnderWorking />,
+          },
+        ],
+      },
+      // Quota Subscription
+      {
+        path: "/dashboard/quota-subscription",
+        element: <UnderWorking />,
       },
       // Profile
       {

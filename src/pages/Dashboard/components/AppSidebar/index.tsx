@@ -102,6 +102,34 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       icon: <PressReleaseIcon />,
       end: true,
     },
+    // Questions
+    {
+      title: "Questions",
+      url: "/dashboard/questions/all",
+      icon: <PressReleaseIcon />,
+      end: true,
+    },
+    // Model tests
+    {
+      title: "Model Tests",
+      url: "/dashboard/model-tests/all",
+      icon: <PressReleaseIcon />,
+      end: true,
+    },
+    // Packages
+    {
+      title: "Packages",
+      url: "/dashboard/packages/all",
+      icon: <PressReleaseIcon />,
+      end: true,
+    },
+    // Quota Subscription
+    {
+      title: "Quota Subscription",
+      url: "/dashboard/quota-subscription",
+      icon: <PressReleaseIcon />,
+      end: true,
+    },
   ];
 
   // Helper function to check if any sub-item is active
