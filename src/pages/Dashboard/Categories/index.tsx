@@ -132,8 +132,8 @@ export default function CategoriesPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Sidebar - Category List */}
-          <div className="lg:col-span-1">
-            <div className="rounded-xl p-4 border border-border">
+          <div className="lg:col-span-1  rounded-xl p-4 border border-border">
+            <div className="max-h-[64vh] overflow-y-auto">
               <h2 className="text-lg font-semibold mb-4 px-2">Categories</h2>
               <div className="space-y-1">
                 {CATEGORIES.map((category) => {
