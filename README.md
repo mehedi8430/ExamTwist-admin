@@ -1,5 +1,7 @@
 # ExamTwist - Admin Platform
 
+questions management demo: ![alt text](image.png)
+
 This is the admin platform for ExamTwist, an exam management system. It is a single-page application built with React, TypeScript, and Vite.
 
 ## Table of Contents
