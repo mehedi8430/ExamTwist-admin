@@ -22,7 +22,7 @@ This is the admin platform for ExamTwist, an exam management system. It is a sin
 - **React Router**: For declarative routing in the application.
 - **Redux Toolkit**: For state management.
 - **Tailwind CSS**: A utility-first CSS framework for styling.
-- **Shadcn/ui**: A collection of re-usable components.
+- **radix-ui**: A collection of re-usable components.
 - **ApexCharts**: For creating interactive charts.
 - **React Hook Form**: For building forms.
 - **ESLint**: For code linting.
