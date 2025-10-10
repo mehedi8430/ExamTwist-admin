@@ -2,6 +2,7 @@ import { AppSidebar } from "@/pages/Dashboard/components/AppSidebar";
 import { SiteHeader } from "@/pages/Dashboard/components/DashboardHeader";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Outlet } from "react-router";
+import Modals from "@/components/Modal";
 
 export default function DashboardLayout() {
   return (
@@ -15,6 +16,8 @@ export default function DashboardLayout() {
           </SidebarInset>
         </div>
       </SidebarProvider>
+
+      <Modals />
     </div>
   );
 }
