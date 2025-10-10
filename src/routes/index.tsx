@@ -1,8 +1,10 @@
 import App from "@/App";
+import CategoryLayout from "@/layouts/CategoryLayout";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import AuthPage from "@/pages/Auth";
 import DashboardPage from "@/pages/Dashboard";
 import CategoriesPage from "@/pages/Dashboard/Categories";
+import CategoryRouteNavigation from "@/pages/Dashboard/Categories/components/CategoryRouteNavigation";
 import Messages from "@/pages/Dashboard/Messages";
 import Notifications from "@/pages/Dashboard/Notifications";
 import ViewProfile from "@/pages/Dashboard/Profile";
@@ -111,13 +113,14 @@ const router = createBrowserRouter([
       // Categories
       {
         path: "/dashboard/categories",
+        element: <CategoryLayout />,
         children: [
           {
             index: true,
-            element: <Navigate to="/dashboard/categories/all" replace />,
+            element: <CategoryRouteNavigation />,
           },
           {
-            path: "/dashboard/categories/all",
+            path: "/dashboard/categories/:categoryId",
             element: <CategoriesPage />,
           },
         ],

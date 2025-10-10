@@ -1,11 +1,13 @@
 import { Navigate } from "react-router";
+import useCurrentUser from "./hooks/useCurrentUser";
 
 export default function App() {
-  const isAuthenticated = false;
+  const userData = useCurrentUser();
+  console.log({ userData });
 
   return (
     <>
-      {isAuthenticated ? (
+      {userData?.id ? (
         <Navigate to={"/dashboard"} />
       ) : (
         <Navigate to={"/admin/login"} />

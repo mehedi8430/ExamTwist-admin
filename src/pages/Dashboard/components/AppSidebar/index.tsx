@@ -111,9 +111,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     // Categories
     {
       title: "Categories",
-      url: "/dashboard/categories/all",
+      url: "/dashboard/categories",
       icon: <FolderTree className="w-5 h-5" />,
-      end: true,
+      end: false,
     },
     // Questions
     {
