@@ -1,46 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
-import {
-  Plus,
-  Edit2,
-  Trash2,
-  X,
-  Save,
-  FileText,
-  BookOpen,
-  Users,
-  Calendar,
-  Layers,
-  Tag,
-  Package,
-} from "lucide-react";
+import { Plus, X, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useParams } from "react-router";
-
-const CATEGORIES = [
-  { id: "section", name: "Section", icon: FileText, color: "bg-blue-500" },
-  { id: "examType", name: "Exam Type", icon: BookOpen, color: "bg-purple-500" },
-  {
-    id: "examSubType",
-    name: "Exam Sub-Type",
-    icon: Layers,
-    color: "bg-indigo-500",
-  },
-  { id: "year", name: "Year", icon: Calendar, color: "bg-green-500" },
-  { id: "group", name: "Group", icon: Users, color: "bg-orange-500" },
-  { id: "level", name: "Level", icon: Layers, color: "bg-cyan-500" },
-  { id: "subject", name: "Subject", icon: BookOpen, color: "bg-pink-500" },
-  { id: "lesson", name: "Lesson", icon: FileText, color: "bg-red-500" },
-  { id: "topics", name: "Topics", icon: Tag, color: "bg-yellow-500" },
-  { id: "subTopics", name: "Sub Topics", icon: Tag, color: "bg-teal-500" },
-  { id: "tags", name: "Tags", icon: Tag, color: "bg-violet-500" },
-  {
-    id: "additionalPackage",
-    name: "Additional Package",
-    icon: Package,
-    color: "bg-emerald-500",
-  },
-];
+import { categories } from "./data";
 
 // Mock data for demonstration
 const generateMockData = (categoryId: string) => {
@@ -69,25 +32,19 @@ const generateMockData = (categoryId: string) => {
 export default function CategoriesPage() {
   const { categoryId } = useParams<{ categoryId: string }>();
   const [selectedCategory, setSelectedCategory] = useState(
-    CATEGORIES.find((c) => c.id === categoryId) || CATEGORIES[0],
+    categories.find((c) => c.id === categoryId) || categories[0],
   );
   const [items, setItems] = useState(generateMockData(selectedCategory.id));
-  const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [formValue, setFormValue] = useState("");
 
   useEffect(() => {
     const currentCategory =
-      CATEGORIES.find((c) => c.id === categoryId) || CATEGORIES[0];
+      categories.find((c) => c.id === categoryId) || categories[0];
     setSelectedCategory(currentCategory);
     setItems(generateMockData(currentCategory.id));
-    setSearchTerm("");
   }, [categoryId]);
-
-  const filteredItems = items.filter((item: any) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
 
   const openModal = (item = null) => {
     setEditingItem(item);
@@ -115,12 +72,6 @@ export default function CategoriesPage() {
       setItems([...items, newItem]);
     }
     closeModal();
-  };
-
-  const handleDelete = (id: string) => {
-    if (window.confirm("Are you sure you want to delete this item?")) {
-      setItems(items.filter((item: any) => item.id !== id));
-    }
   };
 
   const IconComponent = selectedCategory.icon;
