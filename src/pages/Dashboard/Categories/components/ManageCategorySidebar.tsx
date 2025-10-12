@@ -10,7 +10,7 @@ export default function ManageCategorySidebar() {
   return (
     <div className="lg:col-span-1 rounded-xl p-4 bg-primary/10 max-h-[85vh] overflow-y-auto">
       <h2 className="text-lg font-semibold mb-4 px-2">Manage Categories</h2>
-      <div className="space-y-4">
+      <div>
         <Link
           to={{
             pathname: location.pathname,
@@ -23,12 +23,14 @@ export default function ManageCategorySidebar() {
           </Button>
         </Link>
 
-        <SearchInput
-          placeholder="Search categories..."
-          className="w-full"
-          onChange={(value) => console.log(value)}
-          value=""
-        />
+        <div className="mt-4">
+          <SearchInput
+            placeholder="Search categories..."
+            className="w-full"
+            onChange={(value) => console.log(value)}
+            value=""
+          />
+        </div>
       </div>
 
       <div className="mt-4 space-y-1">

@@ -10,12 +10,23 @@ import ProfileIcon from "@/assets/svgs/Profile.svg?react";
 import assets from "@/assets";
 import { useNavigate } from "react-router";
 import { ReusableAlertDialog } from "@/components/ReusableAlertDialog";
+import { useUserLogoutMutation } from "@/redux/endpoints/authApi";
+import { toast } from "sonner";
 
 export default function HeaderAvatar() {
   const navigate = useNavigate();
+  const [userLogout] = useUserLogoutMutation();
 
-  const handleLogout = () => {
-    console.log("Logout");
+  const handleLogout = async () => {
+    try {
+      await userLogout({}).unwrap();
+      toast.success("Logout successful!");
+      navigate("/admin/login");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error?.data?.message || "Something went wrong");
+    }
   };
 
   return (
